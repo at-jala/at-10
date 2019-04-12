@@ -9,7 +9,7 @@ public class SuperCalc {
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("js");        
 		try {
-			Object res = engine.eval("exp");
+			Object res = engine.eval(exp);
 			result=res.toString();
 		} catch (ScriptException e) {
 			// nothing for now

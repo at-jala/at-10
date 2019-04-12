@@ -6,15 +6,15 @@ class SuperCalcTest {
 
 	@Test
 	void expEvaluator_aritmeticExpression_groupedDivision() {
-		String expected = "33";
-		String actual = SuperCalc.expEvaluator("(101 + 0) / 3)");
+		String expected = "33.666666666666664";
+		String actual = SuperCalc.expEvaluator("(101 + 0) / 3");
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	void expEvaluator_aritmeticExpression_groupedMultiplication() {
 		String expected = "30.0000003";
-		String actual = SuperCalc.expEvaluator("(3.0e-6 * 10000000.1))");
+		String actual = SuperCalc.expEvaluator("(3.0e-6 * 10000000.1)");
 		assertEquals(expected, actual);
 	}
 	
