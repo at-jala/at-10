@@ -53,14 +53,4 @@ public class Actor {
 		average=total/movies.size();
 		return average;
 	}
-
-	/*
-	 * This class will have the following instance variables: String name – the full
-	 * name of the actor or actress. ArrayList<Movie> movies – an Arraylist that has
-	 * movies that this actor has acted in. Add getters and setters for these
-	 * instance variables.
-	 * 
-	 * Make sure to create a constructor that initializes your variables
-	 * appropriately.
-	 */
 }

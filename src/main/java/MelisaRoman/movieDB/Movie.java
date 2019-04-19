@@ -56,12 +56,4 @@ public class Movie {
 		actors = new ArrayList<Actor>();
 		rating = 0;
 	}
-
-	/*
-	 * This class will have the following instance variables: String name – the name
-	 * of the movie ArrayList<Actor> actors – an ArrayList of the actors in the
-	 * movie. double rating – a freshness rating from rotten tomatoes
-	 * (www.rottentomatoes.com) Add getters and setters for these instance
-	 * variables.
-	 */
 }
