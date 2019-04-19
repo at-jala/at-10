@@ -1,6 +1,7 @@
 package main.java.MelisaRoman.movieDB;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class MovieDatabase {
@@ -29,11 +30,14 @@ public class MovieDatabase {
 	 * be added to the actorList.
 	 */
 	public void addMovie(String name, String[] actors) {
+		Movie newMovie = new Movie();
+		Actor newActor = new Actor();
 		if (!containsThisMovie(name)) {
-			movieList.add(new Movie(name));
-			actorsThatThisDoesntContain(actors);
+			newMovie.setName(name);
+			movieList.add(newMovie);
+			addActors(actorsThatThisDoesntContain(actors));
 		}
-		
+
 	}
 
 	public boolean containsThisMovie(String name) {
@@ -45,15 +49,15 @@ public class MovieDatabase {
 		}
 		return answer;
 	}
-	
+
 	public ArrayList<Actor> actorsThatThisDoesntContain(String[] names) {
-		ArrayList<Actor> newActors= new ArrayList<Actor>();
+		ArrayList<Actor> newActors = new ArrayList<Actor>();
 		for (int i = 0; i < names.length; i++) {
-			for(int j=0; j<actorList.size();j++) {
-				if(actorList.get(j).isHeSheThisActor(names[i])) {
+			for (int j = 0; j < actorList.size(); j++) {
+				if (actorList.get(j).isHeSheThisActor(names[i])) {
 					newActors.add(new Actor(names[i]));
 				}
-				
+
 			}
 		}
 		return newActors;
@@ -73,18 +77,18 @@ public class MovieDatabase {
 	 * Adds actors to the dataBase
 	 */
 	public void addActor(String name, String[] movies) {
-		Movie newMovie=new Movie();
-		Actor newActor=new Actor();
+		Movie newMovie = new Movie();
+		Actor newActor = new Actor();
 		newActor.setName(name);
-		for(int i=0;i<movies.length;i++) {
+		for (int i = 0; i < movies.length; i++) {
 			newMovie.setName(movies[i]);
+			movieList.add(newMovie);
 		}
 		actorList.add(newActor);
-
 	}
-	
+
 	public void addActors(ArrayList<Actor> actors) {
-		for(int i=0;i<actors.size();i++) {
+		for (int i = 0; i < actors.size(); i++) {
 			actorList.add(actors.get(i));
 		}
 	}
@@ -94,10 +98,17 @@ public class MovieDatabase {
 	 * be a name that is currently in the database.
 	 */
 	public void addRating(String name, double rating) {
-		for (int i = 0; i < movieList.size(); i++) {
-			if (movieList.get(i).isItThisMovie(name)) {
-				movieList.get(i).setRating(rating);
+		/*
+		 * for (int i = 0; i < movieList.size(); i++) { if
+		 * (movieList.get(i).isItThisMovie(name)) { movieList.get(i).setRating(rating);
+		 * } }
+		 */
+		Iterator<Movie> iter = movieList.iterator();
+		while (iter.hasNext()) {
+			if (iter.next().isItThisMovie(name)) {
+				iter.next().setRating(rating);
 			}
+
 		}
 	}
 
@@ -115,12 +126,12 @@ public class MovieDatabase {
 	 * movies. In the case of a tie, returns any one of the best actors
 	 */
 	public String getBestActor() {
-		double bestRatingAverage=0;
-		String nameBestActor="";
-		for(int i=0;i<actorList.size();i++) {
-			if(actorList.get(i).getRatingAverage()>bestRatingAverage) {
-				bestRatingAverage=actorList.get(i).getRatingAverage();
-				nameBestActor=actorList.get(i).getName();
+		double bestRatingAverage = 0;
+		String nameBestActor = "";
+		for (int i = 0; i < actorList.size(); i++) {
+			if (actorList.get(i).getRatingAverage() > bestRatingAverage) {
+				bestRatingAverage = actorList.get(i).getRatingAverage();
+				nameBestActor = actorList.get(i).getName();
 			}
 		}
 		return nameBestActor;
@@ -130,12 +141,12 @@ public class MovieDatabase {
 	 * Returns the name of the movie with the highest rating.
 	 */
 	public String getBestMovie() {
-		double bestRating=0;
-		String bestMovie="";
-		for(int i=0;i<movieList.size();i++) {
-			if(movieList.get(i).getRating()>bestRating) {
-				bestRating=movieList.get(i).getRating();
-				bestMovie=movieList.get(i).getName();
+		double bestRating = 0;
+		String bestMovie = "";
+		for (int i = 0; i < movieList.size(); i++) {
+			if (movieList.get(i).getRating() > bestRating) {
+				bestRating = movieList.get(i).getRating();
+				bestMovie = movieList.get(i).getName();
 			}
 		}
 		return bestMovie;

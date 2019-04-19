@@ -10,13 +10,7 @@ public class Movie {
 
 	public Movie() {
 		name = "";
-
-		/*
-		 * movieList = new ArrayList<>(); actorList = new ArrayList<>();
-		 * 
-		 */
 		actors = new ArrayList<Actor>();
-		// actors.add(new Actor());
 		rating = 0;
 	}
 
