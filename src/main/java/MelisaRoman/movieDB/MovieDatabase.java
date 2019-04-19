@@ -31,7 +31,7 @@ public class MovieDatabase {
 	public void addMovie(String name, String[] actors) {
 		if (!containsThisMovie(name)) {
 			movieList.add(new Movie(name));
-			//falta añadir actores que no están en la lista
+			actorsThatThisDoesntContain(actors);
 		}
 		
 	}
@@ -46,7 +46,7 @@ public class MovieDatabase {
 		return answer;
 	}
 	
-	public ArrayList<Actor> actorsThatThisDontContain(String[] names) {
+	public ArrayList<Actor> actorsThatThisDoesntContain(String[] names) {
 		ArrayList<Actor> newActors= new ArrayList<Actor>();
 		for (int i = 0; i < names.length; i++) {
 			for(int j=0; j<actorList.size();j++) {
@@ -75,11 +75,11 @@ public class MovieDatabase {
 	public void addActor(String name, String[] movies) {
 		Movie newMovie=new Movie();
 		Actor newActor=new Actor();
+		newActor.setName(name);
 		for(int i=0;i<movies.length;i++) {
-			newActor.setName(name);
 			newMovie.setName(movies[i]);
-			actorList.add(newActor);
 		}
+		actorList.add(newActor);
 
 	}
 	
@@ -115,15 +115,30 @@ public class MovieDatabase {
 	 * movies. In the case of a tie, returns any one of the best actors
 	 */
 	public String getBestActor() {
-		return null;
+		double bestRatingAverage=0;
+		String nameBestActor="";
+		for(int i=0;i<actorList.size();i++) {
+			if(actorList.get(i).getRatingAverage()>bestRatingAverage) {
+				bestRatingAverage=actorList.get(i).getRatingAverage();
+				nameBestActor=actorList.get(i).getName();
+			}
+		}
+		return nameBestActor;
 	}
 
 	/*
 	 * Returns the name of the movie with the highest rating.
 	 */
 	public String getBestMovie() {
-		// TODO Auto-generated method stub
-		return null;
+		double bestRating=0;
+		String bestMovie="";
+		for(int i=0;i<movieList.size();i++) {
+			if(movieList.get(i).getRating()>bestRating) {
+				bestRating=movieList.get(i).getRating();
+				bestMovie=movieList.get(i).getName();
+			}
+		}
+		return bestMovie;
 	}
 
 }

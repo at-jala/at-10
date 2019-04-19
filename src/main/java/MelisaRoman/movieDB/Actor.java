@@ -43,6 +43,16 @@ public class Actor {
 		this.name=name;
 		movies = new ArrayList<Movie>();
 	}
+	
+	public double getRatingAverage() {
+		double total=0;
+		double average;
+		for(int i=0;i<movies.size();i++) {
+			total=total+movies.get(i).getRating();
+		}
+		average=total/movies.size();
+		return average;
+	}
 
 	/*
 	 * This class will have the following instance variables: String name – the full
