@@ -5,27 +5,40 @@ import java.util.ArrayList;
 public class Movie {
 	String name;
 	ArrayList<Actor> actors;
-	double rating = 0.0;
-		
+	double rating;
 	
-	public Movie(String name, ArrayList<Actor> actors, double rating) {
-		super();
+	public Movie() {
 		this.name = name;
-		this.actors = actors;
+		this.actors = new ArrayList<>();
 		this.rating = rating;
 	}
-
+	public Movie(String name, double rating) {
+		this.name = name;
+		this.rating = rating;
+	}
+	public Movie(String name) {
+		this.name = name;
+	
+	}
+	
+	
+	
+	public Movie(String movieName, String[] actors) {
+		this.name =movieName;
+		
+	}
+	
 	
 	
 
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
-	public int getRating() {
+	public double getRating() {
 		// TODO Auto-generated method stub
-		return 0;
+		return rating;
 	}	
 		
 	public ArrayList<Actor> getActors() {

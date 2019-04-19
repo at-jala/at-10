@@ -16,28 +16,36 @@ public class MainClass {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		//Create a new instance of a movieDatabase.
 		MovieDatabase movieDB = new MovieDatabase();
-		
+		String path = "C:\\Users\\osa\\Desktop\\At-10\\at-10\\src\\main\\java\\MadayAlcala\\movieDB";
 		//Add all the movies in the file movies.txt. 
-		try (BufferedReader br = new BufferedReader(new FileReader("movies.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(path + "\\movies.txt"))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
-		        String actorName = getValue(line, ",", 0); 
-		    	movieDB.addActor(actorName, getMoviesArray(line));
-		    }
+		        String actorName = getValue(line, ",", 0);
+		        //System.out.println(actorName);
+		    	movieDB.addActor(actorName, getMoviesArray(line));		    	
+		    }		    
+		}
+		catch(IOException e){
+			System.err.print(e);
 		}
 		
 		//Add the ratings for the movies of rating.txt.
-		try (BufferedReader br = new BufferedReader(new FileReader("ratings.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(path + "\\ratings.txt"))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		    	
-		        String movieName = getValue(line, "\t", 0);		    	
+		        String movieName = getValue(line, "\t", 0);	
+		        System.out.println(movieName);
 		    	if (!movieName.equals("movie_name")) {
 		    		double raiting = Double.valueOf(getValue(line, "\t", 1));
-		    		
+		    		 System.out.println(raiting);
 		    		movieDB.addRating(movieName, raiting);	
 				}		    	
 		    }
+		}
+		catch(IOException e){
+			System.err.print(e);
 		}
 		
 		//print out the name of the best actor 

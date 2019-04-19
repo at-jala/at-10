@@ -7,17 +7,21 @@ public class Actor {
 	private String name;
 	private ArrayList<Movie> movies;
 	
+	public Actor() {
+		this.name = "";
+		this.movies = new ArrayList<>();
+	}
 	
-	public Actor(String name, ArrayList<Movie> movies) {
-		super();
+	public Actor(String name, String[] movies) {
 		this.name = name;
-		this.movies = movies;
+		//this.movies = Tomovies;
+		
 	}
 
 		
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}	
 	public ArrayList<Movie> getMovies() {
 		return movies;

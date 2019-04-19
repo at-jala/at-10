@@ -11,8 +11,9 @@ public class MovieDatabaseTest {
 	@Test
 	public void testAddActor() {
 		String[] movies = new String[] {"movie1", "movie2"};
-		movieDB.addActor("actor1", movies);
+		movieDB.addActor("actor1", movies);		
 		assertTrue(movieDB.getActorList().get(0).getName().equals("actor1"));
+		
 	}
 	
 	@Test
@@ -36,5 +37,6 @@ public class MovieDatabaseTest {
 	}
 	
 	
-		
+	
+	
 }
