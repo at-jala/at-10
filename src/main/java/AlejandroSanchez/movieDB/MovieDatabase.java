@@ -36,7 +36,13 @@ public class MovieDatabase {
 	 * Adds actors to the dataBase
 	 */
 	public void addActor(String name, String[] movies) {
-		
+		Actor nuevoActor = new Actor();
+		nuevoActor.setName(name);
+		ArrayList<String> aux = new ArrayList<>();
+		for (int i=0; i<movies.length; i++) {
+			aux.add(movies[i]);
+		}
+		nuevoActor.setMoviesI(aux);
 	}
 	
 	/*
