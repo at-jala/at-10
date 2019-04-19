@@ -81,24 +81,20 @@ public class MovieDatabase {
 	 */
 	public void addActor(String name, String[] movies) {
 		if (!actorInList(name)) {
-			actorList.add(new Actor(name, getMovies(movies)));
+			Actor act = new Actor(name);
+			actorList.add(act);
+			for (int i = 0; i < movies.length; i++) {
+				ArrayList<Actor> actList = new ArrayList<Actor>();
+				actList.add(act);
+				getMovieByName(movies[i]).setActors(actList);
+			}
 		}
 
 	}
 
 	private ArrayList<Movie> getMovies(String[] movies) {
 		ArrayList<Movie> res = new ArrayList<Movie>();
-		for (int i = 0; i < movies.length; i++) {
-			if (isMovieInDatabase(movies[i])) {
-				for (int j = 0; j < movieList.size(); j++) {
-					if (movieList.get(j).getName().compareTo(movies[i]) == 0) {
-						res.add(movieList.get(j));
-					}
-				}
-			}else {
-				res.add(new Movie(movies[i],  ,0));
-			}
-		}
+		
 		return res;
 	}
 

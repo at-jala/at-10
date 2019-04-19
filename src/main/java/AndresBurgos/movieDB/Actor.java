@@ -3,13 +3,19 @@ package main.java.AndresBurgos.movieDB;
 import java.util.ArrayList;
 
 public class Actor {
+
+	private String name;
+	private ArrayList<Movie> movies;
+
 	public Actor(String name, ArrayList<Movie> movies) {
 		this.name = name;
 		this.movies = movies;
 	}
 
-	private String name;
-	private ArrayList<Movie> movies;
+	public Actor(String name) {
+		this.name = name;
+		this.movies = new ArrayList<Movie>();
+	}
 
 	public String getName() {
 		return name;
