@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDatabase {
+	
 	ArrayList<Movie> movieList;
 	ArrayList<Actor> actorList;
-
+	
 	public MovieDatabase() {
 		movieList = new ArrayList<>();
 		actorList = new ArrayList<>();
@@ -20,7 +21,23 @@ public class MovieDatabase {
 	 *  If the movie is a new movie, a movie object is created and added to the movieList. 
 	 *  If any of the actors happen to be new, they will be added to the actorList.
 	 */
+	
+	
 	public void addMovie(String name, String[] actors) {
+		boolean isExisting = false;
+		for (Movie movie: movieList) {
+			if (movie.getName().equals(name)) {
+				isExisting = true;
+				break;
+			}
+		}
+		if (!isExisting) {
+			Movie movie = new Movie(name);
+			for (String actor : actors) {
+				movie.addActor(actor);
+			}
+			movieList.add(movie);
+		}
 		
 	}
 	
@@ -29,7 +46,12 @@ public class MovieDatabase {
 	 * Adds actors to the dataBase
 	 */
 	public void addActor(String name, String[] movies) {
-		
+		Actor actor = new Actor(name);
+		for (String movieName : movies) {
+			actor.addMovie(movieName);
+			addMovie(movieName, new String[] {actor.getName()});
+		}
+		actorList.add(actor);
 	}
 	
 	/*
@@ -37,7 +59,19 @@ public class MovieDatabase {
 	 * is currently in the database.
 	 */
 	public void addRating(String name, double rating) {
-		
+		for (Movie movie: movieList) {
+			if (movie.getName().equals(name)) {
+				movie.setRating(rating);
+				
+			}
+		}
+		for (Actor actor : actorList) {
+			for (Movie actorMovie : actor.getMovies()) {
+				if (actorMovie.getName().equals(name)) {
+					actorMovie.setRating(rating);
+				}
+			}
+		}
 	}
 	
 	/*
@@ -45,7 +79,11 @@ public class MovieDatabase {
 	 * argument will definitely be a name that is currently in the database.
 	 */
 	public void updateRating(String name, double newRating) {
-		
+		for (Movie movie: movieList) {
+			if (movie.getName().equals(name)) {
+				movie.setRating(newRating);
+			}
+		}
 	}
 	
 	/*
@@ -53,15 +91,35 @@ public class MovieDatabase {
 	 * In the case of a tie, returns any one of the best actors
 	 */
 	public String getBestActor() {
-		return null;
+		double bestRating = 0;
+		Actor bestActor = null;
+		for (Actor actor : actorList) {
+			double avg = 0;
+			for (Movie movie : actor.getMovies()) {
+				avg += movie.getRating();
+			}
+			avg /= actor.getMovies().size();
+			if (avg > bestRating) {
+				bestRating = avg;
+				bestActor = actor;
+			}
+		}
+		return bestActor.getName();
 	}
 
 	/*
 	 * Returns the name of the movie with the highest rating.
 	 */
 	public String getBestMovie() {
-		// TODO Auto-generated method stub
-		return null;
+		double bestRating = 0;
+		Movie bestMovie = null;
+		for (Movie movie : movieList) {
+			if (movie.getRating() > bestRating) {
+				bestRating = movie.getRating();
+				bestMovie = movie;
+			}
+		}
+		return bestMovie.getName();
 	}
 
 	public List<Movie> getMovieList(){

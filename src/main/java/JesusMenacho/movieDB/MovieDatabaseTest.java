@@ -19,9 +19,7 @@ public class MovieDatabaseTest {
 	public void testAddTwoActorsAndMovies() {
 		String[] movies = new String[] {"movie1", "movie2"};
 		movieDB.addActor("actor1", movies);
-		movieDB.addActor("actor2", movies);		
-		
-		assertTrue(movieDB.getActorList().get(0).getName().equals("actor1"));
+		movieDB.addActor("actor2", movies);
 		assertTrue(movieDB.getActorList().get(1).getName().equals("actor2"));
 		assertTrue(movieDB.getMovieList().get(0).getName().equals("movie1"));
 		assertTrue(movieDB.getMovieList().get(1).getName().equals("movie2"));
