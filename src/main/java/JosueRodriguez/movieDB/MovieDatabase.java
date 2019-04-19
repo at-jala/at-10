@@ -21,28 +21,28 @@ public class MovieDatabase {
 	 *  If the movie is a new movie, a movie object is created and added to the movieList. 
 	 *  If any of the actors happen to be new, they will be added to the actorList.
 	 */
-	public void addMovie(String name, String[] actors) {
+	public void addMovie(String name, String[] actor){
+		Actor newActor = new Actor();
 		Movie newMovie = new Movie();
-		ArrayList<String> list = new ArrayList<>();
-		for(int i = 0; i<actors.length; i++) {
-			list.add(actors[i]);
+		for (int i = 0;i<actor.length;i++) {
+			newActor.setName(actor[i]);
+			newMovie.setName(name);
+			movieList.add(newMovie);
 		}
-		newMovie.setName(name);
-		newMovie.setActors(list);
-		for(int i = 0; i<movieList.size();i++) {
-			if(movieList.get(0).equals(newMovie)) {
-				break;
-			}else {
-				movieList.add(newMovie);
-			}
-		}
+		
 	}
 	
 	/*
 	 * Adds actors to the dataBase
 	 */
 	public void addActor(String name, String[] movies) {
-		
+		Actor newActor = new Actor();
+		Movie newMovie = new Movie();
+		for (int i = 0;i<movies.length;i++) {
+			newMovie.setName(movies[i]);
+			newActor.setName(name);
+			actorList.add(newActor);
+		}
 	}
 	
 	/*
@@ -50,6 +50,7 @@ public class MovieDatabase {
 	 * is currently in the database.
 	 */
 	public void addRating(String name, double rating) {
+			
 		
 	}
 	
