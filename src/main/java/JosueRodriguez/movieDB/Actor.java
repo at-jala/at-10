@@ -14,6 +14,11 @@ public class Actor {
 	public String getName() {
 		return name;
 	}
+	public void addMovies(String name) {
+		Movie newMovie = new Movie();
+		newMovie.setName(name);
+		movies.add(newMovie);
+	}
 
 	public void setName(String name) {
 		this.name = name;
