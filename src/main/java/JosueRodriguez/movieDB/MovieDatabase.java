@@ -21,7 +21,7 @@ public class MovieDatabase {
 	 * be added to the actorList.
 	 */
 	public void addMovie(String name, String[] actor) {
-		
+
 	}
 
 	/*
@@ -42,12 +42,12 @@ public class MovieDatabase {
 			}
 
 		} else {
-			for(int i = 0; i<actorList.size();i++) {
-				if(newActor.getName()!=actorList.get(i).getName()){
+			for (int i = 0; i < actorList.size(); i++) {
+				if (newActor.getName() != actorList.get(i).getName()) {
 					actorList.add(newActor);
-					for(int j=0;j<newActor.getMovies().size();j++) {
-						for(int k = 0;k<movieList.size();k++) {
-							if(newActor.getMovies().get(k).getName()!=movieList.get(k).getName()) {
+					for (int j = 0; j < newActor.getMovies().size(); j++) {
+						for (int k = 0; k < movieList.size(); k++) {
+							if (newActor.getMovies().get(k).getName() != movieList.get(k).getName()) {
 								movieList.add(newActor.getMovies().get(k));
 							}
 						}
@@ -63,8 +63,8 @@ public class MovieDatabase {
 	 * be a name that is currently in the database.
 	 */
 	public void addRating(String name, double rating) {
-		for(int i=0;i<movieList.size();i++) {
-			if(name == movieList.get(i).getName()) {
+		for (int i = 0; i < movieList.size(); i++) {
+			if (name == movieList.get(i).getName()) {
 				movieList.get(i).setRating(rating);
 			}
 		}

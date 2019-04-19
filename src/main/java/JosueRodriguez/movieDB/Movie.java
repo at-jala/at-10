@@ -13,15 +13,17 @@ public class Movie {
 		actors = new ArrayList<Actor>();
 		rating = 0;
 	}
-	
-	public String getName() {
-		return name;
-	}
+
 	public void addActors(String name) {
 		Actor newActor = new Actor();
 		newActor.setName(name);
 		actors.add(newActor);
 	}
+
+	public String getName() {
+		return name;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}

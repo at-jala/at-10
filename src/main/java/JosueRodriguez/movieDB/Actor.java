@@ -11,13 +11,14 @@ public class Actor {
 		movies = new ArrayList<Movie>();
 	}
 
-	public String getName() {
-		return name;
-	}
 	public void addMovies(String name) {
 		Movie newMovie = new Movie();
 		newMovie.setName(name);
 		movies.add(newMovie);
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {
