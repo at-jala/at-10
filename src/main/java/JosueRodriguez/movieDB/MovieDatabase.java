@@ -38,6 +38,8 @@ public class MovieDatabase {
 	public void addActor(String name, String[] movies) {
 		Actor newActor = new Actor();
 		Movie newMovie = new Movie();
+		MainClass m = new MainClass();
+		m.
 		for (int i = 0;i<movies.length;i++) {
 			newMovie.setName(movies[i]);
 			newActor.setName(name);
