@@ -43,4 +43,7 @@ public class Movie {
 	public void setRating(double rating) {
 		this.rating = rating;
 	}
+	public void addActorToMovie(Actor a) {
+		actors.add(a);
+	}
 }

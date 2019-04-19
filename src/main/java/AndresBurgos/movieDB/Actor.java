@@ -32,5 +32,9 @@ public class Actor {
 	public void setMovies(ArrayList<Movie> movies) {
 		this.movies = movies;
 	}
+	
+	public void addMovieToActor(Movie mov) {
+		this.movies.add(mov);
+	}
 
 }

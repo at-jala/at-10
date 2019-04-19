@@ -18,7 +18,8 @@ public class MainClass {
 		MovieDatabase movieDB = new MovieDatabase();
 		
 		//Add all the movies in the file movies.txt. 
-		try (BufferedReader br = new BufferedReader(new FileReader("movies.txt"))) {
+		//Please the path of the path, the absolute path present fails!!!! 
+		try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Andres\\Desktop\\at-10\\src\\main\\java\\AndresBurgos\\movieDB\\movies.txt"))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		        String actorName = getValue(line, ",", 0); 
@@ -27,7 +28,8 @@ public class MainClass {
 		}
 		
 		//Add the ratings for the movies of rating.txt.
-		try (BufferedReader br = new BufferedReader(new FileReader("ratings.txt"))) {
+		//Please the path of the path, the absolute path present fails!!!!
+		try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Andres\\Desktop\\at-10\\src\\main\\java\\AndresBurgos\\movieDB\\ratings.txt"))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		    	

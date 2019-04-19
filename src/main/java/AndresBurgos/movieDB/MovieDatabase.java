@@ -22,26 +22,38 @@ public class MovieDatabase {
 	 */
 	public void addMovie(String name, String[] actors) {
 		if (!isMovieInDatabase(name)) {
-			movieList.add(new Movie(name, createActorList(actors, name), 0));
+			Movie mov = new Movie(name);
+			movieList.add(mov);
+			for (int i = 0; i < actors.length; i++) {
+				getActorByName(actors[i]).addMovieToActor(mov);
+			}
+		}
+	}
+
+	/*
+	 * Adds actors to the dataBase
+	 */
+	public void addActor(String name, String[] movies) {
+		if (!actorInList(name)) {
+			Actor act = new Actor(name, getMovies(movies));
+			actorList.add(act);
+			for (int i = 0; i < movies.length; i++) {
+				getMovieByName(movies[i]).addActorToMovie(act);
+			}
 		}
 
 	}
 
-	private ArrayList<Actor> createActorList(String[] actors, String movieName) {
-		ArrayList<Actor> actorsMovie = new ArrayList<Actor>();
-		for (int i = 0; i < actors.length; i++) {
-			if (isInActorsList(actors)) {
-				actorsMovie.add(getActorByName(actors[i]));
-			} else {
-				if (getMovieByName(movieName) != null) {
-					ArrayList<Movie> mov = new ArrayList<Movie>();
-					mov.add(getMovieByName(movieName));
-					actorsMovie.add(new Actor(actors[i], mov));
-				}
-
+	private Actor getActorByName(String actorName) {
+		Actor act = null;
+		for (int i = 0; i < actorList.size(); i++) {
+			if (actorList.get(i).getName().compareTo(actorName) == 0) {
+				act = actorList.get(i);
+				break;
 			}
 		}
-		return actorsMovie;
+		return act;
+
 	}
 
 	private Movie getMovieByName(String movieName) {
@@ -55,16 +67,6 @@ public class MovieDatabase {
 		return mov;
 	}
 
-	private boolean isInActorsList(String[] actors) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private Actor getActorByName(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	private boolean isMovieInDatabase(String name) {
 		boolean res = false;
 		for (int i = 0; i < movieList.size(); i++) {
@@ -76,25 +78,17 @@ public class MovieDatabase {
 		return res;
 	}
 
-	/*
-	 * Adds actors to the dataBase
-	 */
-	public void addActor(String name, String[] movies) {
-		if (!actorInList(name)) {
-			Actor act = new Actor(name);
-			actorList.add(act);
-			for (int i = 0; i < movies.length; i++) {
-				ArrayList<Actor> actList = new ArrayList<Actor>();
-				actList.add(act);
-				getMovieByName(movies[i]).setActors(actList);
-			}
-		}
-
-	}
-
 	private ArrayList<Movie> getMovies(String[] movies) {
 		ArrayList<Movie> res = new ArrayList<Movie>();
-		
+		for (int i = 0; i < movies.length; i++) {
+			if (isMovieInDatabase(movies[i])) {
+				res.add(getMovieByName(movies[i]));
+			} else {
+				Movie mov = new Movie(movies[i]);
+				movieList.add(mov);
+				res.add(mov);
+			}
+		}
 		return res;
 	}
 
@@ -114,6 +108,9 @@ public class MovieDatabase {
 	 * be a name that is currently in the database.
 	 */
 	public void addRating(String name, double rating) {
+		if (isMovieInDatabase(name)) {
+			getMovieByName(name).setRating(rating);
+		}
 
 	}
 
@@ -123,7 +120,9 @@ public class MovieDatabase {
 	 * database.
 	 */
 	public void updateRating(String name, double newRating) {
-
+		if (isMovieInDatabase(name)) {
+			getMovieByName(name).setRating(newRating);
+		}
 	}
 
 	/*
@@ -131,15 +130,38 @@ public class MovieDatabase {
 	 * movies. In the case of a tie, returns any one of the best actors
 	 */
 	public String getBestActor() {
-		return null;
+		int max = 0;
+		int index = 0;
+		for (int i = 0; i < actorList.size(); i++) {
+			int actorAvg = getActorAverageRating(actorList.get(i));
+			if (actorAvg > max) {
+				index = i;
+			}
+		}
+		return actorList.get(index).getName();
+	}
+
+	private int getActorAverageRating(Actor actor) {
+		double sum = 0;
+		int numberOfMovies = actor.getMovies().size();
+		for (int i = 0; i < actor.getMovies().size(); i++) {
+			sum += actor.getMovies().get(i).getRating();
+		}
+		return (int) (sum / numberOfMovies);
 	}
 
 	/*
 	 * Returns the name of the movie with the highest rating.
 	 */
 	public String getBestMovie() {
-		// TODO Auto-generated method stub
-		return null;
+		int index = 0;
+		double max = 0;
+		for (int i = 0; i < movieList.size(); i++) {
+			if (movieList.get(i).getRating() > max) {
+				index = i;
+			}
+		}
+		return movieList.get(index).getName();
 	}
 
 	public ArrayList<Movie> getMovieList() {
