@@ -1,5 +1,6 @@
 package main.java.JosueRodriguez.movieDB;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,20 @@ public class MovieDatabase {
 	 *  If any of the actors happen to be new, they will be added to the actorList.
 	 */
 	public void addMovie(String name, String[] actors) {
-		
+		Movie newMovie = new Movie();
+		ArrayList<String> list = new ArrayList<>();
+		for(int i = 0; i<actors.length; i++) {
+			list.add(actors[i]);
+		}
+		newMovie.setName(name);
+		newMovie.setActors(list);
+		for(int i = 0; i<movieList.size();i++) {
+			if(movieList.get(0).equals(newMovie)) {
+				break;
+			}else {
+				movieList.add(newMovie);
+			}
+		}
 	}
 	
 	/*
