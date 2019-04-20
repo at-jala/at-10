@@ -11,7 +11,25 @@ public class MovieDatabase {
 		movieList = new ArrayList<>();
 		actorList = new ArrayList<>();
 	}
+
 	
+	
+	
+	
+	/* Method is meant to be called from within addMovie method below.   */
+	/* If Movie is registered on movieList this method returns the id of */ 
+	/* the Movie on movieList, otherwise it returns -1                   */
+	private int peliculaRegistrada (String name) {
+		int result = -1;
+		int index=0;
+		for (; index<movieList.size(); index++) {
+			if (movieList.get(index).getName() == name) {
+				result = index;
+				break;
+			}
+		}
+		return result;
+	}
 	/*
 	 *  This method takes in the name of a movie that is not currently in the database
 	 *  along with a list of actors for that movie. 
@@ -20,30 +38,82 @@ public class MovieDatabase {
 	 *  If the movie is a new movie, a movie object is created and added to the movieList. 
 	 *  If any of the actors happen to be new, they will be added to the actorList.
 	 */
+	/*
 	public void addMovie(String name, String[] actors) {
-		Movie mov = new Movie();
-		mov.name = name;
+		if (!peliculaRegistrada(name)) {	
+			Movie newMovie = new Movie();
+			movieList.add(newMovie);
+			movieList.get(movieList.size() - 1).setName(name);
+			
+			ArrayList<String> intermediateList = new ArrayList<>();
+			for (int i=0; i<actors.length; i++) {
+				intermediateList.add(actors[i]);
+			}
+			newMovie.setActorsI(intermediateList);
 
-		for (int i=0; i<actors.length; i++) {
-			Actor acc = new Actor();
-			acc.setName(actors[i]);
-			mov.setActors();
 		}
-	}
 	
+	}
+	*/
 
+
+	/* Method is meant to be called from within addActor method below.    */
+	/* If Actor is registered on actorList this method returns the id of  */ 
+	/* the Actor on actorList, otherwise it returns -1                    */
+	private int actorRegistrado (String name) {
+		int result = -1;
+		int index = 0;
+		for (; index<actorList.size(); index++) {
+			if (actorList.get(index).getName() == name) {
+				result = index;
+				break;
+			}
+		}
+		return result;
+	}
 	/*
 	 * Adds actors to the dataBase
 	 */
 	public void addActor(String name, String[] movies) {
-		Actor nuevoActor = new Actor();
-		nuevoActor.setName(name);
-		ArrayList<String> aux = new ArrayList<>();
-		for (int i=0; i<movies.length; i++) {
-			aux.add(movies[i]);
+		if (actorRegistrado(name) == -1) {
+			Actor newActor = new Actor();
+			actorList.add(newActor);
+			actorList.get(actorList.size() - 1).setName(name);
+
+
+			for (int i=0; i<movies.length; i++) {
+				// Si la pelicula ya esta registrada, entonces
+				// verificar que la pelicula tenga al actor en 
+				// su propia lista de actores.
+				// Si el actor esta en la lista de la pelicula
+				// no pasa naranjas, pero si no esta, añadir el
+				// recientemente creado objeto Actor.
+				if (peliculaRegistrada(movies[i]) != -1) {
+					boolean aux = false;
+					for (int j=0; j<movieList.get(peliculaRegistrada(movies[i])).getActors().size(); j++) {
+						if (       movieList.get(peliculaRegistrada(movies[i])).getActors().get(j).getName() == name                  ) {
+							aux = true;
+							break;
+						}
+					}
+					if (!aux) {
+						movieList.get(peliculaRegistrada(movies[i])).addActors(newActor);
+					}
+				} 
+				else {
+					Movie newMovie = new Movie();
+					movieList.add(newMovie);
+					movieList.get(movieList.size() - 1).setName(movies[i]);
+					movieList.get(movieList.size() - 1).getActors().add(newActor);
+				}
+			}
+			
+			
 		}
-		nuevoActor.setMoviesI(aux);
 	}
+
+	
+	
 	
 	/*
 	 * Adds a rating for this movie. Assume that the name argument will definitely be a name that 
@@ -73,7 +143,7 @@ public class MovieDatabase {
 		double accumulator = 0;
 		int indice= 0;
 		for (int i=0; i<actorList.size(); i++) {
-			ArrayList<Movie> lista = new ArrayList<>();  
+			List<Movie> lista = new ArrayList<>();  
 			lista = actorList.get(i).getMovies(); 
 			double sum = 0;
 			for (int j=0; j<lista.size(); j++) {
@@ -103,7 +173,8 @@ public class MovieDatabase {
 		}
 		for (int i=0; i<movieList.size(); i++) {
 			if (movieList.get(i).getRating() == accumulator) {
-				result += movieList.get(i).getName(); 
+				result += movieList.get(i).getName();
+				break;
 			}
 		}
 		return result;
