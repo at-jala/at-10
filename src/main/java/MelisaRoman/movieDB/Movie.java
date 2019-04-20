@@ -1,11 +1,12 @@
 package main.java.MelisaRoman.movieDB;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Movie {
 
 	private String name;
-	private ArrayList<Actor> actors;
+	private List<Actor> actors;
 	private double rating;
 
 	public Movie() {
@@ -14,16 +15,17 @@ public class Movie {
 		rating = 0;
 	}
 
-	public Movie(String name, ArrayList<Actor> actors) {
+	public Movie(String name) {
 		this.name = name;
-		this.actors = actors;
+		actors = new ArrayList<Actor>();
+		rating = 0;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public ArrayList<Actor> getActors() {
+	public List<Actor> getActors() {
 		return actors;
 	}
 
@@ -35,7 +37,7 @@ public class Movie {
 		this.name = name;
 	}
 
-	public void setActors(ArrayList<Actor> actors) {
+	public void setActors(List<Actor> actors) {
 		this.actors = actors;
 	}
 
@@ -43,17 +45,16 @@ public class Movie {
 		this.rating = rating;
 	}
 
-	public boolean isItThisMovie(String title) {
-		boolean answer = false;
-		if (title == this.name) {
-			answer = true;
+	public void printMovie() {
+		System.out.println("Title: " + name);
+		System.out.println("Rating: " + rating);
+		System.out.println("Cast: ");
+		for (int i = 0; i < actors.size(); i++) {
+			System.out.println(actors.get(i).getName());
 		}
-		return answer;
 	}
-	
-	public Movie(String name) {
-		this.name=name;
-		actors = new ArrayList<Actor>();
-		rating = 0;
+
+	public void addNewToItsActors(Actor actor) {
+		actors.add(actor);
 	}
 }

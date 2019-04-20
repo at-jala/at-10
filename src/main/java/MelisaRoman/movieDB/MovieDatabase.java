@@ -1,23 +1,22 @@
 package main.java.MelisaRoman.movieDB;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class MovieDatabase {
-	ArrayList<Movie> movieList;
-	ArrayList<Actor> actorList;
+	private List<Movie> movieList;
+	private List<Actor> actorList;
 
 	public MovieDatabase() {
 		movieList = new ArrayList<Movie>();
 		actorList = new ArrayList<Actor>();
 	}
 
-	public ArrayList<Movie> getMovieList() {
+	public List<Movie> getMovieList() {
 		return movieList;
 	}
 
-	public ArrayList<Actor> getActorList() {
+	public List<Actor> getActorList() {
 		return actorList;
 	}
 
@@ -30,67 +29,84 @@ public class MovieDatabase {
 	 * be added to the actorList.
 	 */
 	public void addMovie(String name, String[] actors) {
-		Movie newMovie = new Movie();
-		Actor newActor = new Actor();
-		if (!containsThisMovie(name)) {
-			newMovie.setName(name);
+		if (!this.containsMovie(name)) {
+			Movie newMovie = new Movie(name);
 			movieList.add(newMovie);
-			addActors(actorsThatThisDoesntContain(actors));
-		}
-
-	}
-
-	public boolean containsThisMovie(String name) {
-		boolean answer = false;
-		for (int i = 0; i < movieList.size(); i++) {
-			if (movieList.get(i).isItThisMovie(name)) {
-				answer = true;
-			}
-		}
-		return answer;
-	}
-
-	public ArrayList<Actor> actorsThatThisDoesntContain(String[] names) {
-		ArrayList<Actor> newActors = new ArrayList<Actor>();
-		for (int i = 0; i < names.length; i++) {
-			for (int j = 0; j < actorList.size(); j++) {
-				if (actorList.get(j).isHeSheThisActor(names[i])) {
-					newActors.add(new Actor(names[i]));
+			for (int i = 0; i < actors.length; i++) {
+				if (!this.containsActor(actors[i])) {
+					Actor newActor = new Actor(actors[i]);
+					newActor.addNewToItsMovies(newMovie);
+					newMovie.addNewToItsActors(newActor);
+					actorList.add(newActor);
 				}
-
+				else{
+					newMovie.addNewToItsActors(getActor(actors[i]));
+					getActor(actors[i]).addNewToItsMovies(newMovie);
+				}
 			}
 		}
-		return newActors;
 	}
-
-	public boolean containsThisActor(String name) {
-		boolean answer = false;
-		for (int i = 0; i < actorList.size(); i++) {
-			if (actorList.get(i).isHeSheThisActor(name)) {
-				answer = true;
-			}
-		}
-		return answer;
-	}
-
+	
 	/*
 	 * Adds actors to the dataBase
 	 */
 	public void addActor(String name, String[] movies) {
-		Movie newMovie = new Movie();
-		Actor newActor = new Actor();
-		newActor.setName(name);
-		for (int i = 0; i < movies.length; i++) {
-			newMovie.setName(movies[i]);
-			movieList.add(newMovie);
+		if (!this.containsActor(name)) {
+			Actor newActor = new Actor(name);
+			actorList.add(newActor);
+			for (int i = 0; i < movies.length; i++) {
+				if (!this.containsMovie(movies[i])) {
+					Movie newMovie = new Movie(movies[i]);
+					newMovie.addNewToItsActors(newActor);
+					newActor.addNewToItsMovies(newMovie);
+					movieList.add(newMovie);
+				}
+				else {
+					newActor.addNewToItsMovies(getMovie(movies[i]));
+					getMovie(movies[i]).addNewToItsActors(newActor);
+				}
+			}
 		}
-		actorList.add(newActor);
+	}
+	
+	public Actor getActor(String name) {
+		Actor actor=new Actor();
+		for(int i=0;i<actorList.size();i++) {
+			if(actorList.get(i).getName().equals(name)) {
+				actor= actorList.get(i);
+			}
+		}
+		return actor;
+	}
+	
+	public Movie getMovie(String name) {
+		Movie movie=new Movie();
+		for(int i=0;i<movieList.size();i++) {
+			if(movieList.get(i).getName().equals(name)) {
+				movie= movieList.get(i);
+			}
+		}
+		return movie;
 	}
 
-	public void addActors(ArrayList<Actor> actors) {
-		for (int i = 0; i < actors.size(); i++) {
-			actorList.add(actors.get(i));
+	public boolean containsMovie(String name) {
+		boolean answer = false;
+		for (int i = 0; i < movieList.size(); i++) {
+			if (movieList.get(i).getName().equals(name)) {
+				answer = true;
+			}
 		}
+		return answer;
+	}
+
+	public boolean containsActor(String name) {
+		boolean answer = false;
+		for (int i = 0; i < actorList.size(); i++) {
+			if (actorList.get(i).getName().equals(name)) {
+				answer = true;
+			}
+		}
+		return answer;
 	}
 
 	/*
@@ -98,17 +114,11 @@ public class MovieDatabase {
 	 * be a name that is currently in the database.
 	 */
 	public void addRating(String name, double rating) {
-		/*
-		 * for (int i = 0; i < movieList.size(); i++) { if
-		 * (movieList.get(i).isItThisMovie(name)) { movieList.get(i).setRating(rating);
-		 * } }
-		 */
-		Iterator<Movie> iter = movieList.iterator();
-		while (iter.hasNext()) {
-			if (iter.next().isItThisMovie(name)) {
-				iter.next().setRating(rating);
-			}
 
+		for (int i = 0; i < movieList.size(); i++) {
+			if (movieList.get(i).getName().equals(name)) {
+				movieList.get(i).setRating(rating);
+			}
 		}
 	}
 
@@ -118,7 +128,11 @@ public class MovieDatabase {
 	 * database.
 	 */
 	public void updateRating(String name, double newRating) {
-
+		for (int i = 0; i < movieList.size(); i++) {
+			if (movieList.get(i).getName().equals(name)) {
+				movieList.get(i).setRating(newRating);
+			}
+		}
 	}
 
 	/*
@@ -152,4 +166,15 @@ public class MovieDatabase {
 		return bestMovie;
 	}
 
+	public void printMovieList() {
+		for (int i = 0; i < movieList.size(); i++) {
+			System.out.println(i + " " + movieList.get(i).getName());
+		}
+	}
+
+	public void printActorList() {
+		for (int i = 0; i < actorList.size(); i++) {
+			System.out.println(i + " " + actorList.get(i).getName());
+		}
+	}
 }

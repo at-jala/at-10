@@ -43,6 +43,7 @@ public class MainClass {
 		//print out the name of the best actor 
 		System.out.println("The best Actor is: " + movieDB.getBestActor());
 		
+		
 		//print out the name of the highest rated movie
 		System.out.println("The best Movie is: " + movieDB.getBestMovie());
 		
