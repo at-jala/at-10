@@ -27,15 +27,15 @@ public class MainClass {
 		}
 		
 		//Add the ratings for the movies of rating.txt.
-		try (BufferedReader br = new BufferedReader(new FileReader("c:\\\\_pg\\\\GitRoot\\\\at-10\\\\src\\\\main\\\\java\\\\AlejandroSanchez\\\\movieDB\\\\ratings.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("c:\\_pg\\GitRoot\\at-10\\src\\main\\java\\AlejandroSanchez\\movieDB\\ratings.txt"))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		    	
 		        String movieName = getValue(line, "\t", 0);		    	
 		    	if (!movieName.equals("movie_name")) {
-		    		double raiting = Double.valueOf(getValue(line, "\t", 1));
+		    		double rating = Double.valueOf(getValue(line, "\t", 1));
 		    		
-		    		movieDB.addRating(movieName, raiting);	
+		    		movieDB.addRating(movieName, rating);	
 				}		    	
 		    }
 		}

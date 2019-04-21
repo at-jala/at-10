@@ -22,8 +22,8 @@ public class MovieDatabase {
 	private int peliculaRegistrada (String name) {
 		int result = -1;
 		int index=0;
-		for (; index<movieList.size(); index++) {
-			if (movieList.get(index).getName() == name) {
+		for (; index<getMovieList().size(); index++) {
+			if (getMovieList().get(index).getName().equals(name)) {
 				result = index;
 				break;
 			}
@@ -45,7 +45,6 @@ public class MovieDatabase {
 			movieList.add(newMovie);
 			movieList.get(movieList.size() - 1).setName(name);
 			
-			ArrayList<String> intermediateList = new ArrayList<>();
 			for (int i=0; i<actors.length; i++) {
 				intermediateList.add(actors[i]);
 			}
@@ -64,7 +63,7 @@ public class MovieDatabase {
 		int result = -1;
 		int index = 0;
 		for (; index<actorList.size(); index++) {
-			if (actorList.get(index).getName() == name) {
+			if (actorList.get(index).getName().equals(name)) {
 				result = index;
 				break;
 			}
@@ -91,13 +90,14 @@ public class MovieDatabase {
 				if (peliculaRegistrada(movies[i]) != -1) {
 					boolean aux = false;
 					for (int j=0; j<movieList.get(peliculaRegistrada(movies[i])).getActors().size(); j++) {
-						if (       movieList.get(peliculaRegistrada(movies[i])).getActors().get(j).getName() == name                  ) {
+						if (       movieList.get(peliculaRegistrada(movies[i])).getActors().get(j).getName().equals(name)                   ) {
 							aux = true;
 							break;
 						}
 					}
 					if (!aux) {
 						movieList.get(peliculaRegistrada(movies[i])).addActors(newActor);
+						newActor.getMovies().add(movieList.get(peliculaRegistrada(movies[i])));
 					}
 				} 
 				else {
@@ -105,11 +105,13 @@ public class MovieDatabase {
 					movieList.add(newMovie);
 					movieList.get(movieList.size() - 1).setName(movies[i]);
 					movieList.get(movieList.size() - 1).getActors().add(newActor);
+					newActor.getMovies().add(newMovie);
 				}
 			}
 			
 			
 		}
+
 	}
 
 	
@@ -121,7 +123,7 @@ public class MovieDatabase {
 	 */
 	public void addRating(String name, double rating) {
 		for (int i=0; i<movieList.size(); i++) {
-			if (name == movieList.get(i).getName()) {
+			if (movieList.get(i).getName().equals(name)) {
 				movieList.get(i).setRating(rating); 
 			}
 		}
