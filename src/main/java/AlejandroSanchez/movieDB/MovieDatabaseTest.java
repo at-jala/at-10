@@ -36,4 +36,29 @@ public class MovieDatabaseTest {
 		movieDB.addRating("movie1", 10);
 		assertTrue(movieDB.getMovieList().get(0).getRating() == 10);
 	}
+	
+	
+	/* Added test cases for MovieDatabase.addMovie(String, String[]) */
+	@Test
+	public void testAddMovie() {
+		String[] actors = new String[] {"actor1", "actor2"};
+		movieDB.addMovie("movie1", actors);
+		assertTrue(movieDB.getMovieList().get(0).getName().equals("movie1"));
+	}
+	
+	@Test
+	public void testAddTwoMoviesAndActors() {
+		String[] actors = new String[] {"actor1", "actor2"};
+		movieDB.addMovie("movie1", actors);
+		movieDB.addMovie("movie2", actors);		
+		
+		assertTrue(movieDB.getMovieList().get(0).getName().equals("movie1"));
+		assertTrue(movieDB.getMovieList().get(1).getName().equals("movie2"));
+		assertTrue(movieDB.getActorList().get(0).getName().equals("actor1"));
+		assertTrue(movieDB.getActorList().get(1).getName().equals("actor2"));
+		/* Check against duplicated entries */
+		assertEquals(2, movieDB.getActorList().size());
+	}
+	
+	
 }

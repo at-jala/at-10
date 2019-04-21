@@ -36,18 +36,46 @@ public class MovieDatabase {
 	 *  If the movie is a new movie, a movie object is created and added to the movieList. 
 	 *  If any of the actors happen to be new, they will be added to the actorList.
 	 */
-	/*
 	public void addMovie(String name, String[] actors) {
-		if (peliculaRegistrada(name) == NO) {	
+		if (peliculaRegistrada(name) == NO) {
 			Movie newMovie = new Movie();
 			movieList.add(newMovie);
 			movieList.get(movieList.size() - 1).setName(name);
+
+			for (int i=0; i<actors.length; i++) {
+				// If actors[i] is registered, check that is has 
+				// the movie listed on its 'movies' List.
+				// If not, add 'newMovie' to the Actor 'movies' List 
+				// And finally, add the Actor object to 'newMovie' 
+				// 'actors' List.
+				if (actorRegistrado(actors[i]) != NO) {
+					boolean aux = false;
+					for (int j=0; j<actorList.get(actorRegistrado(actors[i])).getMovies().size(); j++) {
+						if (actorList.get(actorRegistrado(actors[i])).getMovies().get(j).getName().equals(name)) {
+							aux = true;
+							break;
+						}
+					}
+					if (!aux) {
+						actorList.get(actorRegistrado(actors[i])).addMovie(newMovie);
+						newMovie.getActors().add(actorList.get(actorRegistrado(actors[i])));
+					}
+				} 
+				// If actors[i] is not registered, create a new Actor object, 
+				// add it to 'MovieDB's actorList, set its 'name' attribute and 
+				// add 'newMovie' to its 'movies' List.
+				// Finally, add 'newActor' to 'newMovie's 'actors' List.
+				else {
+					Actor newActor = new Actor();
+					actorList.add(newActor);
+					actorList.get(actorList.size() - 1).setName(actors[i]);
+					actorList.get(actorList.size() - 1).getMovies().add(newMovie);
+					newMovie.getActors().add(newActor);
+				}
+			}
 			
-			// alszla:
-			// Do we really need this?
 		}
 	}
-	*/
 
 
 	/* Method is meant to be called from within addActor method below.    */
