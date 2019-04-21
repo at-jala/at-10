@@ -25,6 +25,8 @@ public class MovieDatabaseTest {
 		assertTrue(movieDB.getActorList().get(1).getName().equals("actor2"));
 		assertTrue(movieDB.getMovieList().get(0).getName().equals("movie1"));
 		assertTrue(movieDB.getMovieList().get(1).getName().equals("movie2"));
+		/* Check against duplicated entries */
+		assertEquals(2, movieDB.getMovieList().size());
 	}
 	
 	@Test

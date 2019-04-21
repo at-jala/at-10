@@ -12,7 +12,7 @@ public class Movie {
 	public Movie() {
 		name = "";
 		actors = new ArrayList<Actor>();
-		rating = 0;
+		rating = 0.0;
 	}
 	
 	public String getName() {
@@ -31,7 +31,7 @@ public class Movie {
 		this.actors = actors;
 	}
 
-	public void addActors (Actor actor) {
+	public void addActor (Actor actor) {
 		actors.add(actor);
 	}
 

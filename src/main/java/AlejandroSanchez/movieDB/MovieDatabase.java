@@ -11,19 +11,17 @@ public class MovieDatabase {
 		movieList = new ArrayList<>();
 		actorList = new ArrayList<>();
 	}
-
-	
-	
 	
 	
 	/* Method is meant to be called from within addMovie method below.   */
 	/* If Movie is registered on movieList this method returns the id of */ 
 	/* the Movie on movieList, otherwise it returns -1                   */
+	private final int NO = -1;
 	private int peliculaRegistrada (String name) {
-		int result = -1;
+		int result = NO;
 		int index=0;
-		for (; index<getMovieList().size(); index++) {
-			if (getMovieList().get(index).getName().equals(name)) {
+		for (; index<movieList.size(); index++) {
+			if (movieList.get(index).getName().equals(name)) {
 				result = index;
 				break;
 			}
@@ -40,18 +38,14 @@ public class MovieDatabase {
 	 */
 	/*
 	public void addMovie(String name, String[] actors) {
-		if (!peliculaRegistrada(name)) {	
+		if (peliculaRegistrada(name) == NO) {	
 			Movie newMovie = new Movie();
 			movieList.add(newMovie);
 			movieList.get(movieList.size() - 1).setName(name);
 			
-			for (int i=0; i<actors.length; i++) {
-				intermediateList.add(actors[i]);
-			}
-			newMovie.setActorsI(intermediateList);
-
+			// alszla:
+			// Do we really need this?
 		}
-	
 	}
 	*/
 
@@ -60,7 +54,7 @@ public class MovieDatabase {
 	/* If Actor is registered on actorList this method returns the id of  */ 
 	/* the Actor on actorList, otherwise it returns -1                    */
 	private int actorRegistrado (String name) {
-		int result = -1;
+		int result = NO;
 		int index = 0;
 		for (; index<actorList.size(); index++) {
 			if (actorList.get(index).getName().equals(name)) {
@@ -74,32 +68,34 @@ public class MovieDatabase {
 	 * Adds actors to the dataBase
 	 */
 	public void addActor(String name, String[] movies) {
-		if (actorRegistrado(name) == -1) {
+		if (actorRegistrado(name) == NO) {
 			Actor newActor = new Actor();
 			actorList.add(newActor);
 			actorList.get(actorList.size() - 1).setName(name);
 
-
 			for (int i=0; i<movies.length; i++) {
-				// Si la pelicula ya esta registrada, entonces
-				// verificar que la pelicula tenga al actor en 
-				// su propia lista de actores.
-				// Si el actor esta en la lista de la pelicula
-				// no pasa naranjas, pero si no esta, añadir el
-				// recientemente creado objeto Actor.
-				if (peliculaRegistrada(movies[i]) != -1) {
+				// If movies[i] is registered, check that is has 
+				// the actor listed on its 'actors' List.
+				// If not, add 'newActor' to the Movie 'actors' List 
+				// And finally, add the Movie object to 'newActor' 
+				// 'movies' List.
+				if (peliculaRegistrada(movies[i]) != NO) {
 					boolean aux = false;
 					for (int j=0; j<movieList.get(peliculaRegistrada(movies[i])).getActors().size(); j++) {
-						if (       movieList.get(peliculaRegistrada(movies[i])).getActors().get(j).getName().equals(name)                   ) {
+						if (movieList.get(peliculaRegistrada(movies[i])).getActors().get(j).getName().equals(name)) {
 							aux = true;
 							break;
 						}
 					}
 					if (!aux) {
-						movieList.get(peliculaRegistrada(movies[i])).addActors(newActor);
+						movieList.get(peliculaRegistrada(movies[i])).addActor(newActor);
 						newActor.getMovies().add(movieList.get(peliculaRegistrada(movies[i])));
 					}
 				} 
+				// If movies[i] is not registered, create a new Movie object, 
+				// add it to 'MovieDB's movieList, set its 'name' attribute and 
+				// add 'newActor' to its 'actors' List.
+				// Finally, add 'newMovie' to 'newActor's 'movies' List.
 				else {
 					Movie newMovie = new Movie();
 					movieList.add(newMovie);
@@ -109,12 +105,8 @@ public class MovieDatabase {
 				}
 			}
 			
-			
 		}
-
 	}
-
-	
 	
 	
 	/*
@@ -128,6 +120,7 @@ public class MovieDatabase {
 			}
 		}
 	}
+
 	
 	/*
 	 * Overwrites the current rating of a movie with this new rating. Again, assume that the name 
@@ -136,6 +129,7 @@ public class MovieDatabase {
 	public void updateRating(String name, double newRating) {
 		this.addRating(name, newRating);
 	}
+
 	
 	/*
 	 * Returns the name of the actor that has the best average rating for their movies.
@@ -143,25 +137,24 @@ public class MovieDatabase {
 	 */
 	public String getBestActor() {
 		double accumulator = 0;
-		int indice= 0;
+		int index= 0;
 		for (int i=0; i<actorList.size(); i++) {
-			List<Movie> lista = new ArrayList<>();  
-			lista = actorList.get(i).getMovies(); 
+			List<Movie> list = new ArrayList<>();  
+			list = actorList.get(i).getMovies(); 
 			double sum = 0;
-			for (int j=0; j<lista.size(); j++) {
-				sum += lista.get(j).getRating();
+			for (int j=0; j<list.size(); j++) {
+				sum += list.get(j).getRating();
 			}
-			double prom = sum/lista.size();
-			if (prom >= accumulator) {
-				accumulator = prom;
-				indice = i;
+			double average = sum/list.size();
+			if (average >= accumulator) {
+				accumulator = average;
+				index = i;
 			}
-			
 		}
-		
-		return actorList.get(indice).getName();
+		return actorList.get(index).getName();
 	}
 
+	
 	/*
 	 * Returns the name of the movie with the highest rating.
 	 */
@@ -182,9 +175,11 @@ public class MovieDatabase {
 		return result;
 	}
 
+	
 	public List<Movie> getMovieList(){
 		return movieList;
 	}
+
 	
 	public List<Actor> getActorList(){
 		return actorList;
