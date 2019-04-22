@@ -2,12 +2,13 @@ package main.java.MadayAlcala.movieDB;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class MovieDatabaseTest {
 
 	MovieDatabase movieDB = new MovieDatabase();
-	
+	//@Ignore
 	@Test
 	public void testAddActor() {
 		String[] movies = new String[] {"movie1", "movie2"};
@@ -15,19 +16,20 @@ public class MovieDatabaseTest {
 		assertTrue(movieDB.getActorList().get(0).getName().equals("actor1"));
 		
 	}
-	
+	//@Ignore
 	@Test
 	public void testAddTwoActorsAndMovies() {
 		String[] movies = new String[] {"movie1", "movie2"};
 		movieDB.addActor("actor1", movies);
-		movieDB.addActor("actor2", movies);		
-		
+		movieDB.addActor("actor2", movies);	
+
 		assertTrue(movieDB.getActorList().get(0).getName().equals("actor1"));
 		assertTrue(movieDB.getActorList().get(1).getName().equals("actor2"));
 		assertTrue(movieDB.getMovieList().get(0).getName().equals("movie1"));
 		assertTrue(movieDB.getMovieList().get(1).getName().equals("movie2"));
+
 	}
-	
+	//@Ignore
 	@Test
 	public void testAddRating() {
 		String[] movies = new String[] {"movie1", "movie2"};
@@ -36,6 +38,14 @@ public class MovieDatabaseTest {
 		assertTrue(movieDB.getMovieList().get(0).getRating() == 10);
 	}
 	
+	@Test
+	public void testBestMovie() {
+		String[] movies = new String[] {"movie1", "movie2"};
+		movieDB.addActor("actor1", movies);
+		movieDB.addRating("movie1", 10);
+		movieDB.addRating("movie2", 7);
+		assertTrue(movieDB.getBestMovie() == "movie1");
+	}
 	
 	
 	

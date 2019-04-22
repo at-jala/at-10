@@ -36,12 +36,14 @@ public class MainClass {
 		    while ((line = br.readLine()) != null) {
 		    	
 		        String movieName = getValue(line, "\t", 0);	
-		        System.out.println(movieName);
-		    	if (!movieName.equals("movie_name")) {
+		        if (!movieName.equals("movie_name")) {
 		    		double raiting = Double.valueOf(getValue(line, "\t", 1));
-		    		 System.out.println(raiting);
-		    		movieDB.addRating(movieName, raiting);	
-				}		    	
+		    		movieDB.addRating(movieName, raiting);
+		    		String[] movies = new String[] {"movie1", "movie2"};
+		    		movieDB.addActor("actor1", movies);
+		    		movieDB.addRating("movie1", 10);
+		    		movieDB.addRating("movie2", 7);
+		    		}		    	
 		    }
 		}
 		catch(IOException e){

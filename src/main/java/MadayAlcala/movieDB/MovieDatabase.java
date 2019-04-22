@@ -31,9 +31,8 @@ public class MovieDatabase {
 	public void addActor(String name, String[] movies) {
 		Actor newActor = new Actor(name, movies);
 		actorList.add(newActor);
-		for (String movie : movies) {
-			Movie movie2 = new Movie(movie);
-			movieList.add(movie2);
+		for (int i=0; i<(newActor.getMovies()).size(); i++) {
+			movieList.add((newActor.getMovies()).get(i));
 		}
 	}
 
@@ -43,7 +42,7 @@ public class MovieDatabase {
 	 */
 	public void addRating(String name, double rating) {
 		for(int i=0;i<movieList.size()-1; i++) {
-			if(movieList.get(i).getName().toString()== name) {
+			if(movieList.get(i).getName() == name) {
 				movieList.get(i).setRating(rating);
 			}
 		}
@@ -57,8 +56,8 @@ public class MovieDatabase {
 	 * database.
 	 */
 	public void updateRating(String name, double newRating) {
-		Movie movie = new Movie(name);
-		movie.setRating(newRating);
+		//Movie movie = new Movie(name);
+		//movie.setRating(newRating);
 	}
 
 	/*
@@ -74,9 +73,17 @@ public class MovieDatabase {
 	 * Returns the name of the movie with the highest rating.
 	 */
 	public String getBestMovie() {
-		// TODO Auto-generated method stub
-		
-		return "La Odisea";
+			String bestMovie = "";
+			double scoreBestMovie = 0;
+			for(int i=0;i<movieList.size()-1; i++) {
+				double scoreActual = movieList.get(i).getRating();
+				String movieActual = movieList.get(i).getName();
+				if( scoreActual > scoreBestMovie) {
+					scoreBestMovie = scoreActual;
+					bestMovie = movieActual;					
+				}
+			}
+			return bestMovie;
 	}
 
 	public List<Movie> getMovieList() {
