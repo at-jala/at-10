@@ -17,7 +17,7 @@ public class MainClass {
 		//Create a new instance of a movieDatabase.
 		MovieDatabase movieDB = new MovieDatabase();
 		
-		//Add all the movies in the file movies.txt. 
+		//Add all the movies in the file movies.txt.
 		try (BufferedReader br = new BufferedReader(new FileReader("c:\\_pg\\GitRoot\\at-10\\src\\main\\java\\AlejandroSanchez\\movieDB\\movies.txt"))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {

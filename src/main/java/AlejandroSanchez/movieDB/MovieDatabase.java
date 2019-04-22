@@ -19,8 +19,7 @@ public class MovieDatabase {
 	private final int NO = -1;
 	private int peliculaRegistrada (String name) {
 		int result = NO;
-		int index=0;
-		for (; index<movieList.size(); index++) {
+		for (int index=0; index<movieList.size(); index++) {
 			if (movieList.get(index).getName().equals(name)) {
 				result = index;
 				break;
@@ -83,8 +82,7 @@ public class MovieDatabase {
 	/* the Actor on actorList, otherwise it returns -1                    */
 	private int actorRegistrado (String name) {
 		int result = NO;
-		int index = 0;
-		for (; index<actorList.size(); index++) {
+		for (int index=0; index<actorList.size(); index++) {
 			if (actorList.get(index).getName().equals(name)) {
 				result = index;
 				break;
