@@ -4,23 +4,18 @@ import java.awt.Graphics;
 
 public class Triangle extends Shape {
 
-	private int pointAx;
-	private int pointBx;
-	private int pointCx;
-	private int pointAy;
-	private int pointBy;
-	private int pointCy;
-
-	public Triangle(int pAx, int pBx, int pCx, int pAy, int pBy, int pCy) {
-		pointAx = pAx;
-		pointBx = pBx;
-		pointCx = pCx;
-		pointAy = pAy;
-		pointBy = pBy;
-		pointCy = pCy;
+	private int[] posX;
+	private int[] posY;
+	private final int NUMBER_SIDES = 3; 
+	
+	public Triangle(int[] posX, int [] posY) {
+		//formulas para obtener ancho **
+		super(1);
+		this.posX = posX;
+		this.posY = posY;
 	}
 
 	public void draw(Graphics g) {
-		g.drawPolygon(new int[] { pointAx, pointBx, pointCx }, new int[] { pointAy, pointBy, pointCy }, 3);
+		g.drawPolygon(posX, posY, NUMBER_SIDES);
 	}
 }

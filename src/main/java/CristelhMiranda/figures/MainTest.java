@@ -22,18 +22,19 @@ public class MainTest extends JFrame {
 		super.paint(g);
 		Square square = new Square(200);
 		square.draw(g);
-		
-		Line line = new Line(50,50,100,100);
-		line.draw(g);
-		
-		Triangle triangle = new Triangle(200, 150, 250, 200, 250, 250);
+
+		Line line = new Line(50, 50, 100, 100);
+		line.draw(g);		
+
+		//Triangle
+		int[] posX = {200,150,250};
+		int[] posY = {200,250,250};
+		Triangle triangle = new Triangle(posX, posY);
 		triangle.draw(g);
 	}
 
 	public static void main(String args[]) {
 		MainTest main = new MainTest();
 		main.setVisible(true);
-		
 	}
-
 }
