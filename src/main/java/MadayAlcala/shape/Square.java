@@ -1,4 +1,6 @@
-package shape;
+package main.java.MadayAlcala.shape;
+
+
 
 import java.awt.Color;
 import java.awt.Graphics;

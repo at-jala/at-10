@@ -1,4 +1,5 @@
-package shape;
+package main.java.MadayAlcala.shape;
+
 
 import java.util.ArrayList;
 import java.util.List;
