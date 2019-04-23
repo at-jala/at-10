@@ -1,4 +1,4 @@
-package Shape;
+package main.java.JosueRodriguez.Shape;
 
 public class Triangle extends Shape {
 	private int base;

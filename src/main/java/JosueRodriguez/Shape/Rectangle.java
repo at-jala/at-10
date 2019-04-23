@@ -1,4 +1,4 @@
-package Shape;
+package main.java.JosueRodriguez.Shape;
 
 public class Rectangle extends Shape {
 	private int length;

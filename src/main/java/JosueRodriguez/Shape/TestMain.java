@@ -1,4 +1,4 @@
-package Shape;
+package main.java.JosueRodriguez.Shape;
 
 public class TestMain {
 	public static void main(String[] args) {
