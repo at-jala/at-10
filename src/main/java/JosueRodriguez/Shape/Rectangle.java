@@ -1,5 +1,8 @@
 package main.java.JosueRodriguez.Shape;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class Rectangle extends Shape {
 	private int length;
 	private int width;
@@ -9,11 +12,11 @@ public class Rectangle extends Shape {
 		this.width = width;
 	}
 
-	public void draw() {
+	public void draw(Graphics g) {
 		System.out.println("Draw a Restangle of color " + getColor());
-
+		g.drawRect(10, 10, width, length);
+		g.setColor(Color.RED);
 	}
-
 	public double getArea() {
 		return length * width;
 	}

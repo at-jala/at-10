@@ -1,22 +1,18 @@
 package main.java.JosueRodriguez.Shape;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.*;
+
 public class TestMain {
+	public void paint(Graphics g){
+		Rectangle newRectangle = new Rectangle(12,6);
+		g.drawRect(x, y, width, height);
+	}
 	public static void main(String[] args) {
-		Shape newShape = new Shape();
-		Rectangle newRectangle = new Rectangle(12, 6);
-		Triangle newTriangle = new Triangle(12, 18);
-		
-		
-		newRectangle.draw();
-		newTriangle.draw();
-		newShape.draw();
-		
-		newRectangle.setColor("blue");
-		newTriangle.setColor("red");
-		
-		newRectangle.draw();
-		newTriangle.draw();
-		newShape.draw();
+
+
 		
 		
 	}

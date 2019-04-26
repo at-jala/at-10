@@ -5,6 +5,7 @@ package main.java.JosueRodriguez.Shape;
 public class Shape{
 	private String color;
 	
+	
 	public Shape() {
 		this.color = "black"; 
 
