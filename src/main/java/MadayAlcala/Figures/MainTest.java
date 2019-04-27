@@ -1,36 +1,47 @@
 package main.java.MadayAlcala.Figures;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 public class MainTest {
 	public static void main(String args[]) {
-		List <Figure> figures= new ArrayList<Figure>();
-		boolean menu = false;
+		List<Figure> figures = new ArrayList<Figure>();
+		boolean menu = true;
+		Figure last = null;
 		do {
-			System.out.print("1.- Create rectangle\r\n2.- Create square\r\n3.- Display figure\r\n0.- Exit");
+			System.out.print("1.- Create rectangle\r\n2.- Create square\r\n3.- Display figure\r\n0.- Exit\n");
 			Scanner in = new Scanner(System.in);
 			int option = in.nextInt();
-			Figure last=null;
+
 			switch (option) {
 			case 1:
-				last = new Rectangle(5, 10, "I am a Rectangle", "R-01");
-				//figures.add(rectangle);
-				
+				System.out.print("Enter base: ");
+				int baseRectangle = in.nextInt();
+				System.out.print("Enter height: ");
+				int heightRectangle = in.nextInt();
+				last = new Rectangle(baseRectangle, heightRectangle);
 				break;
 			case 2:
-				last = new Square(5, "S-01");
-				//figures.add(square);
+				System.out.print("Enter side: ");
+				int sideSquare = in.nextInt();
+				last = new Square(sideSquare);
+				// figures.add(square);
 				break;
 			case 3:
 				last.printDescription();
-				
+				last.drawTxt();
+				break;
+			case 0:
+				menu = false;
+				System.out.println("Thanks for playing!!! =D");
 				break;
 			default:
 				break;
 			}
-		}while(menu);{
-			
+		} while (menu);
+		{
+
 		}
 	}
 }
-	

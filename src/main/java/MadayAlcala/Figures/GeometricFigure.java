@@ -1,39 +1,41 @@
 package main.java.MadayAlcala.Figures;
 
-public class GeometricFigure extends Figure{
-	String description;
-	GeometricFigure(String description,String tag){
-		super(tag);
+public abstract class GeometricFigure extends Figure {
+	final String figureType;
+	final String tag;
+	final String description;
+
+	GeometricFigure(String figureType, String tag, String description) {
+		super();
+		this.figureType = figureType;
+		this.tag = tag;
 		this.description = description;
 	}
-	public String getFigureType() {
+
+	public abstract int getBase();
+
+	public abstract void drawTxt();
+
+	public String getTag() {
+		return tag;
+	}
+
+	public final String getFigureType() {
+		return figureType;
+	}
+
+	public final String getDescription() {
 		return description;
 	}
-	
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public double area() {
+
+	public double getArea() {
 		return 0;
 	}
-	public void drawTxt() {
-		
-	}
-	public void printDescription() {
-		System.out.println("Tag: "+tag);
-		System.out.println("Figure Type: "+getFigureType());
-		System.out.println("Area: "+area());
-	}
-	
-	/*
-	 * 	Tag: C-5
-		Figure Type: Square
-		Area: 25
 
-	 * 
-	 */
-	
+	public final void printDescription() {
+		System.out.println("Tag: " + getTag());
+		System.out.println("Figure Type: " + getFigureType());
+		System.out.println("Area: " + getArea());
+	}
+
 }
