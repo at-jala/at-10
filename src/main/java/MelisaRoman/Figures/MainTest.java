@@ -1,4 +1,5 @@
 package main.java.MelisaRoman.Figures;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +23,7 @@ public class MainTest {
 			case 2:
 				System.out.print("Enter side: ");
 				int sideSquare = inputScan.nextInt();
-				last = new Square(sideSquare,"I am a Square", "S-01");
+				last = new Square(sideSquare, "I am a Square", "S-01");
 				break;
 			case 3:
 				last.printDescription();

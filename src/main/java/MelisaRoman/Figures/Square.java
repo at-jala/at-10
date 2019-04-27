@@ -12,7 +12,7 @@ public class Square extends GeometricFigure {
 	public String getFigureType() {
 		return "Square";
 	}
-	
+
 	public double getArea() {
 		return side * side;
 	}

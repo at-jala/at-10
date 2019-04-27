@@ -1,4 +1,5 @@
 package main.java.MelisaRoman.Figures;
+
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
@@ -24,43 +25,42 @@ public class RectangleTest {
 
 	@Test
 	public void getBase_rectangleBase7_result7() {
-		Figure rectangle = new Rectangle(7, 3,"I'm Rectangle","R-01");
-		assertEquals(7, ((Rectangle)rectangle).getBase());
+		Figure rectangle = new Rectangle(7, 3, "I'm Rectangle", "R-01");
+		assertEquals(7, ((Rectangle) rectangle).getBase());
 	}
-	
+
 	@Test
 	public void getHeight_rectangleHeight7_result7() {
-		Figure rectangle = new Rectangle(7, 7,"I'm Rectangle","R-01");
-		assertEquals(7, ((Rectangle)rectangle).getHeight());
+		Figure rectangle = new Rectangle(7, 7, "I'm Rectangle", "R-01");
+		assertEquals(7, ((Rectangle) rectangle).getHeight());
 	}
-	
-		
+
 	private PrintStream sysOut;
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
- 
-    @Before
-    public void setUpStreams() {
-        sysOut = System.out;
-        System.setOut(new PrintStream(outContent));
-    }
- 
-    @After
-    public void revertStreams() {
-        System.setOut(sysOut);
-    }
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+	@Before
+	public void setUpStreams() {
+		sysOut = System.out;
+		System.setOut(new PrintStream(outContent));
+	}
+
+	@After
+	public void revertStreams() {
+		System.setOut(sysOut);
+	}
 
 	@Test
 	public void drawTxt_rectangleBase4Height3_correctResult() {
-	   	String drawing = "****\r\n****\r\n****\r\n";
-		Figure rectangle = new Rectangle(4, 3,"I'm Rectangle","R-01");
+		String drawing = "****\r\n****\r\n****\r\n";
+		Figure rectangle = new Rectangle(4, 3, "I'm Rectangle", "R-01");
 		rectangle.drawTxt();
 		assertEquals(drawing, outContent.toString());
 	}
-	
+
 	@Test
 	public void printDescription_rectangleBase4Height3_correctResult() {
-	   	String description = "Tag: R-01\r\nFigure Type: Rectangle\r\nArea: 12.0\r\n";
-	   	Figure rectangle = new Rectangle(4, 3,"I'm Rectangle","R-01");
+		String description = "Tag: R-01\r\nFigure Type: Rectangle\r\nArea: 12.0\r\n";
+		Figure rectangle = new Rectangle(4, 3, "I'm Rectangle", "R-01");
 		rectangle.printDescription();
 		assertEquals(description, outContent.toString());
 	}
