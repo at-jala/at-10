@@ -1,29 +1,29 @@
 package main.java.JosueRodriguez.Figure;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 public class MainTest {
 	public static void main(String args[]) {
-		List <Figure> figures= new ArrayList<Figure>();
 		boolean menu = true;
+		Scanner input = new Scanner(System.in);
 		Figure last=null;
 		do {
-			System.out.print("1.- Create rectangle\r\n2.- Create square\r\n3.- Display figure\r\n0.- Exit\n");
-			Scanner in = new Scanner(System.in);
-			int option = in.nextInt();
-			
+			System.out.print(""
+					+ "1.- Create rectangle\n"
+					+ "2.- Create square\n"
+					+ "3.- Display figure\n"
+					+ "0.- Exit\n");
+			int option = input.nextInt();
 			switch (option) {
 			case 1:
 				System.out.print("Enter base: ");
-				int baseRectangle = in.nextInt();
+				int baseRectangle = input.nextInt();
 				System.out.print("Enter height: ");
-				int heightRectangle = in.nextInt();
-				last = new Rectangle(baseRectangle, heightRectangle, "I am a Rectangle", "R-01");
+				int heightRectangle = input.nextInt();
+				last = new Rectangle("I am a Rectangle", "R-01",baseRectangle, heightRectangle);
 				break;
 			case 2:
 				System.out.print("Enter side: ");
-				int sideSquare = in.nextInt();
-				last = new Square(sideSquare, "R-01");
+				int sideSquare = input.nextInt();
+				last = new Square("I am a Square", "R-01", sideSquare);
 				//figures.add(square);
 				break;
 			case 3:
@@ -37,9 +37,7 @@ public class MainTest {
 			default:
 				break;
 			}
-		}while(menu);{
-			
-		}
+		}while(menu);
 	}
 }
 	

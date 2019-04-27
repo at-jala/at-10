@@ -1,25 +1,17 @@
 package main.java.JosueRodriguez.Figure;
-public class Figure {
-	String tag;
+public abstract class Figure {
+	protected String tag;
 	public Figure(String tag){
 		this.tag=tag;
 	}
 	
-	public String getTag() {
-		return tag;
-	}
+	public abstract String getTag();
 
-	public String getFigureType() {
-		return "";
-	}
+	public abstract String getFigureType();
 
-	public double getArea() {
-		return 0;
-	}
+	public abstract double getArea();
 
-	public void drawTxt() {
-	}
+	public abstract void drawTxt();
 
-	public void printDescription() {
-	}
+	public abstract void printDescription();
 }
