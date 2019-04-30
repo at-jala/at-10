@@ -6,7 +6,7 @@ public class BoilerHeater extends Component implements Heater {
 
 	public BoilerHeater(String name) {
 		super(name);
-
+		status=TURN_OFF;
 	}
 
 	@Override
