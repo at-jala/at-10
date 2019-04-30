@@ -1,6 +1,6 @@
 package main.java.AlejandroSanchez.coffeeMaker;
 
-public class Heater {
+public class Heater implements Drive {
 	final boolean OFF = false; 
 	final boolean ON = true; 
 	boolean status;
@@ -26,11 +26,11 @@ public class Heater {
 		this.sensor = sensor;
 	}
 	
-	void off() {
+	public void off() {
 		status = OFF;
 	}
 	
-	void on() {
+	public void on() {
 		status = ON;
 	}
 }
