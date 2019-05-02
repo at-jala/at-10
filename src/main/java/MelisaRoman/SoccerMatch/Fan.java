@@ -1,11 +1,11 @@
 package main.java.MelisaRoman.SoccerMatch;
 
-public class Fan extends Person implements IFan{
+public class Fan extends Person implements IFan {
 
 	SoccerTeam soccerTeam;
-	
+
 	public void cheer() {
-		System.out.println("GO GO GO "+ soccerTeam.getName() );
+		System.out.println("GO GO GO " + soccerTeam.getName());
 	}
 
 	public void scream() {
@@ -14,6 +14,10 @@ public class Fan extends Person implements IFan{
 
 	public void wave() {
 		System.out.println("Waving");
+	}
+
+	public void setSoccerTeam(SoccerTeam soccerTeam) {
+		this.soccerTeam = soccerTeam;
 	}
 
 }
