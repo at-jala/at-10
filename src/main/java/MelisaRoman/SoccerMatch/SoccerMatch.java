@@ -17,9 +17,7 @@ public class SoccerMatch {
 		team1.playMatch();
 		team2.playMatch();
 		
-		for(int i=0;i<4;i++) {
-			referees.get(i).admonish();
-		}
+		referees.get(0).whistle();
 
 	}
 	

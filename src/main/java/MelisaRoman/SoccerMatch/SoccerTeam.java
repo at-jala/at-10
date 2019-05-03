@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SoccerTeam implements ISoccerTeam {
 	List<IPlayer> players;
-	List<ITrainer> technicalTeam;
+	ITrainer coach;
 	String name;
 	
 	public void train() {
